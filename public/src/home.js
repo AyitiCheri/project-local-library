@@ -18,23 +18,22 @@ function getBooksBorrowedCount(books) {
 
 function getMostCommonGenres(books) { 
   let countObj = {};
-    books.forEach(book => {
-      if (countObj[book.genre] != null) {
-        countObj[book.genre]++;
-      } else {
-        countObj[book.genre] = 1;
-      }
-    });
+  books.forEach( function (book)  {
+    if (countObj[book.genre] != null) {
+      countObj[book.genre]++;
+    } else {
+      countObj[book.genre] = 1;
+    } return countObj;
+  });
   let countArray = [];
-  for (const [key, value] of Object.entries(countObj)) {
-      countArray.push({
-        'name' : key,
-        'count' : value
-      }); 
-    }
-    countArray.sort((a,b) => b.count - a.count);
-    return countArray.slice(0, 5);
+  for (const [key, value] of Object.entries(countObj)){
+    countArray.push({
+      'name' : key,
+      'count' : value
+    }); 
   }
+ return countArray.sort((a,b) => b.count - a.count).slice(0, 5);
+}
 
 function getMostPopularBooks(books) { 
    const borrows = books.map(book=>({name:book.title, count:book.borrows.length}));
